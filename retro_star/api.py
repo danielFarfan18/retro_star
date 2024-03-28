@@ -16,11 +16,10 @@ import torch
 import logging
 import time
 # Importing necessary modules from the project
-from retro_star.common import prepare_starting_molecules, prepare_mlp, \
-    prepare_molstar_planner, smiles_to_fp
+from retro_star.common import *
 from retro_star.model import ValueMLP
 from retro_star.utils import setup_logger
-
+from common.prepare_utils import prepare_single_step_model
 import os
 # Getting the directory path of the current file
 dirpath = os.path.dirname(os.path.abspath(__file__))
@@ -50,7 +49,7 @@ class RSPlanner:
         starting_mols = prepare_starting_molecules(starting_molecules)
 
         # Preparing the MLP
-        one_step = prepare_mlp(mlp_templates, mlp_model_dump)
+        one_step = prepare_single_step_model(mlp_model_dump)
 
         # If use_value_fn is True, load the model and define the value function
         if use_value_fn:

@@ -24,7 +24,7 @@ parser.add_argument('--value_val', default='val_mol_fp_value_step')
 
 # ================== one-step model ================ #
 parser.add_argument('--mlp_model_dump',
-                    default='one_step_model/saved_rollout_state_1_2048.ckpt')
+                    default='one_step_model/finetuned_model.product-reactants_step_215000.pt')
 parser.add_argument('--mlp_templates',
                     default='one_step_model/template_rules_1.dat')
 

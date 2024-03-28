@@ -1,4 +1,5 @@
 import pickle
+import torch
 import pandas as pd
 import logging
 from mlp_retrosyn.mlp_inference import MLPModel
@@ -17,10 +18,9 @@ def prepare_starting_molecules(filename):
     logging.info('%d starting molecules loaded' % len(starting_mols))
     return starting_mols
 
-def prepare_mlp(templates, model_dump):
-    logging.info('Templates: %s' % templates)
-    logging.info('Loading trained mlp model from %s' % model_dump)
-    one_step = MLPModel(model_dump, templates, device=-1)
+def prepare_single_step_model(model_dump):
+    logging.info('Loading trained sngle step model from %s' % model_dump)
+    one_step = torch.load(model_dump)
     return one_step
 
 def prepare_molstar_planner(one_step, value_fn, starting_mols, expansion_topk,
