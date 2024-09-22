@@ -1,4 +1,4 @@
-from retro_star.api import RSPlanner
+from api import RSPlanner
 
 planner = RSPlanner(
     gpu=-1,

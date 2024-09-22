@@ -3,8 +3,35 @@ import logging
 
 
 class MolNode:
+    """
+    Represents a node in a molecule tree.
+
+    Attributes:
+        mol: The molecule associated with the node.
+        pred_value: The predicted value of the node.
+        value: The current value of the node.
+        succ_value: The total cost for existing solution.
+        parent: The parent node of the current node.
+        id: The ID of the node.
+        depth: The depth of the node in the tree.
+        is_known: A boolean indicating if the node is known.
+        children: The children nodes of the current node.
+        succ: A boolean indicating if the node is a successor.
+        open: A boolean indicating if the node is open for expansion.
+    """
+
     def __init__(self, mol, init_value, parent=None, is_known=False,
                  zero_known_value=True):
+        """
+        Initializes a MolNode object.
+
+        Args:
+            mol: The molecule associated with the node.
+            init_value: The initial value of the node.
+            parent: The parent node of the current node. Defaults to None.
+            is_known: A boolean indicating if the node is known. Defaults to False.
+            zero_known_value: A boolean indicating if the known value should be set to zero. Defaults to True.
+        """
         self.mol = mol
         self.pred_value = init_value
         self.value = init_value
@@ -32,13 +59,13 @@ class MolNode:
 
     def v_self(self):
         """
-        :return: V_self(self | subtree)
+        Returns the value of the current node.
         """
         return self.value
 
     def v_target(self):
         """
-        :return: V_target(self | whole tree)
+        Returns V_target(self | whole tree).
         """
         if self.parent is None:
             return self.value
@@ -46,6 +73,15 @@ class MolNode:
             return self.parent.v_target()
 
     def init_values(self, no_child=False):
+        """
+        Initializes the values of the node and its children.
+
+        Args:
+            no_child: A boolean indicating if the node has no children. Defaults to False.
+
+        Returns:
+            The change in value (v_delta) of the node.
+        """
         assert self.open and (no_child or self.children)
 
         new_value = np.inf
@@ -67,6 +103,15 @@ class MolNode:
         return v_delta
 
     def backup(self, succ):
+        """
+        Backs up the node's value and successor information to its parent.
+
+        Args:
+            succ: A boolean indicating if the node is a successor.
+
+        Returns:
+            The change in value (v_delta) of the node.
+        """
         assert not self.is_known
 
         new_value = np.inf
@@ -90,6 +135,12 @@ class MolNode:
             return self.parent.backup(v_delta, from_mol=self.mol)
 
     def serialize(self):
+        """
+        Serializes the node into a string representation.
+
+        Returns:
+            The serialized string representation of the node.
+        """
         text = '%d | %s' % (self.id, self.mol)
         # text = '%d | %s | pred %.2f | value %.2f | target %.2f' % \
         #        (self.id, self.mol, self.pred_value, self.v_self(),
@@ -97,6 +148,12 @@ class MolNode:
         return text
 
     def get_ancestors(self):
+        """
+        Returns a set of all the ancestors of the node.
+
+        Returns:
+            A set containing all the ancestors of the node.
+        """
         if self.parent is None:
             return {self.mol}
 

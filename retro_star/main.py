@@ -1,24 +1,10 @@
-"""
-This script defines the RSPlanner class for retrosynthetic planning in chemistry. 
-Retrosynthetic planning is a process where you start with a target molecule and plan backwards 
-to find simpler starting molecules and the reactions needed to synthesize the target. 
-
-The RSPlanner class uses a Multi-Layer Perceptron (MLP) model for one-step retrosynthesis prediction 
-and optionally a ValueMLP model as a value function to guide the search. 
-
-The plan method of the RSPlanner class performs the retrosynthetic planning for a given target molecule 
-and returns the result. 
-
-If the script is run directly, it creates an instance of RSPlanner and calls the plan method for 
-three different target molecules.
-"""
 import torch
 import logging
 import time
 # Importing necessary modules from the project
-from retro_star.common import *
-from retro_star.model import ValueMLP
-from retro_star.utils import setup_logger
+from common import *
+from model import ValueMLP
+from utils import setup_logger
 
 import os
 from common.prepare_utils import prepare_single_step_model
@@ -33,24 +19,38 @@ class RSPlanner:
                  gpu=-1,  # The GPU device number to use. If -1, CPU is used.
                  expansion_topk=50,  # The number of top molecules to consider for expansion
                  iterations=500,  # The number of iterations to perform
-                 use_value_fn=False,  # Whether to use a value function to guide the search
+                 use_value_fn=True,  # Whether to use a value function to guide the search
                  starting_molecules=dirpath+'/dataset/origin_dict.csv',  # The path to the file containing the starting molecules
-                 mlp_model_dump=dirpath+'/one_step_model/finetuned_model.product-reactants_step_215000.pt',  # The path to the file containing the single step model (R-SIMLES)
+                 mlp_model_dump=dirpath+'/one_step_model/R_SMILES.pt',  # The path to the file containing the single step model (R-SIMLES)
                  save_folder=dirpath+'/saved_models',  # The folder to save the models
                  value_model='best_epoch_final_4.pt',  # The name of the value model file
                  fp_dim=2048,  # The dimension of the fingerprint
-                 viz=False,  # Whether to visualize the planning process
+                 viz=True,  # Whether to visualize the planning process
                  viz_dir='viz'):  # The directory to save the visualizations
+        """
+        Initializes the RetroStar object.
 
-
+        Parameters:
+        - gpu (int): The GPU device number to use. If -1, CPU is used.
+        - expansion_topk (int): The number of top molecules to consider for expansion.
+        - iterations (int): The number of iterations to perform.
+        - use_value_fn (bool): Whether to use a value function to guide the search.
+        - starting_molecules (str): The path to the file containing the starting molecules.
+        - mlp_model_dump (str): The path to the file containing the single step model (R-SIMLES).
+        - save_folder (str): The folder to save the models.
+        - value_model (str): The name of the value model file.
+        - fp_dim (int): The dimension of the fingerprint.
+        - viz (bool): Whether to visualize the planning process.
+        - viz_dir (str): The directory to save the visualizations.
+        """
         setup_logger()
         # Setting the device for torch
-        device = torch.device('cuda:%d' % gpu if gpu >= 0 else 'cpu')
+        device = torch.device('cuda:%d' % gpu if torch.cuda.is_available() and gpu >= 0 else 'cpu')
         # Preparing the starting molecules
         starting_mols = prepare_starting_molecules(starting_molecules)
 
         # load single step model (R-SIMLES)
-        one_step = prepare_single_step_model(mlp_model_dump)
+        one_step = prepare_single_step_model(mlp_model_dump, device)
 
         # If use_value_fn is True, load the model and define the value function
         if use_value_fn:
@@ -119,11 +119,11 @@ if __name__ == '__main__':
         expansion_topk=50
     )
 
-    result = planner.plan('CCCC[C@@H](C(=O)N1CCC[C@H]1C(=O)O)[C@@H](F)C(=O)OC')
+    result = planner.plan('N[C@H]1CC[C@H]1c1ccc(Cl)cc1')
     print(result)
 
-    result = planner.plan('CCOC(=O)c1nc(N2CC[C@H](NC(=O)c3nc(C(F)(F)F)c(CC)[nH]3)[C@H](OC)C2)sc1C')
-    print(result)
+    #result = planner.plan('CCOC(=O)c1nc(N2CC[C@H](NC(=O)c3nc(C(F)(F)F)c(CC)[nH]3)[C@H](OC)C2)sc1C')
+    #print(result)
 
-    result = planner.plan('CC(C)c1ccc(-n2nc(O)c3c(=O)c4ccc(Cl)cc4[nH]c3c2=O)cc1')
-    print(result)
+    #result = planner.plan('CC(C)c1ccc(-n2nc(O)c3c(=O)c4ccc(Cl)cc4[nH]c3c2=O)cc1')
+    #print(result)

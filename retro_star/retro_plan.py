@@ -9,10 +9,10 @@ import logging
 import time
 import pickle
 import os
-from retro_star.common import args, prepare_starting_molecules, prepare_mlp, \
+from common import args, prepare_starting_molecules, prepare_mlp, \
     prepare_molstar_planner, smiles_to_fp
-from retro_star.model import ValueMLP
-from retro_star.utils import setup_logger
+from model import ValueMLP
+from utils import setup_logger
 
 def retro_plan():
     # Set up the device for computation (CPU or GPU).

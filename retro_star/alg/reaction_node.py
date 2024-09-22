@@ -4,6 +4,14 @@ import logging
 
 class ReactionNode:
     def __init__(self, parent, cost, template):
+        """
+        Initializes a ReactionNode object.
+
+        Args:
+            parent (ReactionNode): The parent node of the current node.
+            cost (float): The cost associated with the current node.
+            template: The template associated with the current node.
+        """
         self.parent = parent
         
         self.depth = self.parent.depth + 1
@@ -21,17 +29,26 @@ class ReactionNode:
 
     def v_self(self):
         """
-        :return: V_self(self | subtree)
+        Calculates the value of the current node.
+
+        Returns:
+            float: The value of the current node.
         """
         return self.value
 
     def v_target(self):
         """
-        :return: V_target(self | whole tree)
+        Calculates the target value of the current node.
+
+        Returns:
+            float: The target value of the current node.
         """
         return self.target_value
 
     def init_values(self):
+        """
+        Initializes the values of the current node and its children.
+        """
         assert self.open
 
         self.value = self.cost
@@ -50,6 +67,16 @@ class ReactionNode:
         self.open = False
 
     def backup(self, v_delta, from_mol=None):
+        """
+        Backs up the changes made to the current node and propagates the changes to its parent.
+
+        Args:
+            v_delta (float): The change in value.
+            from_mol: The molecule from which the change originated.
+
+        Returns:
+            ReactionNode: The parent node.
+        """
         self.value += v_delta
         self.target_value += v_delta
 
@@ -69,6 +96,13 @@ class ReactionNode:
         return self.parent.backup(self.succ)
 
     def propagate(self, v_delta, exclude=None):
+        """
+        Propagates the changes made to the current node to its children.
+
+        Args:
+            v_delta (float): The change in value.
+            exclude: The molecule to exclude from propagation.
+        """
         if exclude is None:
             self.target_value += v_delta
 
@@ -78,6 +112,12 @@ class ReactionNode:
                     grandchild.propagate(v_delta)
 
     def serialize(self):
+        """
+        Serializes the current node.
+
+        Returns:
+            str: The serialized representation of the current node.
+        """
         return '%d' % (self.id)
         # return '%d | value %.2f | target %.2f' % \
         #        (self.id, self.v_self(), self.v_target())

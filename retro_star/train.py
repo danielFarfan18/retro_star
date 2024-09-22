@@ -1,15 +1,3 @@
-"""
-This script is used to train a ValueMLP model for retrosynthetic planning in chemistry. 
-The ValueMLP model is a neural network model that is used as a value function to guide the search 
-in the retrosynthetic planning process. 
-
-The script defines a function `train` that prepares the model and the data loaders, 
-creates a Trainer instance, and starts the training process. 
-
-If the script is run directly, it sets the random seeds for reproducibility, sets up the logger, 
-and calls the `train` function.
-"""
-
 import os
 import numpy as np
 import torch
@@ -17,13 +5,19 @@ import random
 import pickle
 import torch.nn.functional as F
 import logging
-from retro_star.common import args
-from retro_star.model import ValueMLP
-from retro_star.data_loader import ValueDataLoader
-from retro_star.trainer import Trainer
-from retro_star.utils import setup_logger
+from common import args
+from model import ValueMLP
+from data_loader import ValueDataLoader
+from trainer import Trainer
+from utils import setup_logger
 
 def train():
+    """
+    Trains the ValueMLP model using the provided training and validation data.
+
+    Returns:
+        None
+    """
     # Set the device for torch
     device = torch.device('cuda' if args.gpu >= 0 else 'cpu')
 

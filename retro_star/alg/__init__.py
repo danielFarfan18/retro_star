@@ -1,1 +1,1 @@
-from retro_star.alg.molstar import molstar
+from alg.molstar import molstar

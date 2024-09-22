@@ -1,0 +1,50 @@
+C 1 C C C O 1
+C ( = O ) ( [O-] ) [O-]
+C C N ( C C ) C C
+C c 1 c c c c c 1
+C ( = O ) ( [O-] ) O . N C
+C C ( C ) ( C ) [O-]
+C C O C C
+C ( C ) ( C ) N C ( C ) C
+C C ( = O ) O C ( C ) = O
+C C ( = O ) O
+C
+C ( = O ) ( [O-] ) O . N ( C ) C
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1
+C ( = O ) ( [O-] ) O . N
+C ( = O ) ( [O-] ) O . N O
+C C 1 ( C ) O C ( = O ) C = C ( C ) N 1 Br
+C c 1 c c c c c 1 . O = C ( C ) O O
+C c 1 c c c c c 1 . O C ( = O ) [O-]
+C C 1 ( C ) O C ( = O ) C = C ( C ) O 1
+C C 1 ( C ) O C ( = O ) C = C ( N ) N 1
+C ( = O ) ( [O-] ) O . C ( = O ) N ( C ) C
+C ( = O ) ( [O-] ) O . N ( C ) ( C ) C = O
+C C ( = O ) O C ( C ) = O . N
+C ( = O ) ( [O-] ) O . C ( # N ) [K]
+C c 1 c c c c c 1 . O = C ( C ) O C ( C ) = O
+C ( = O ) ( [O-] ) O . C ( = O ) ( [O-] ) O . [F-]
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . [NH4+]
+
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( [Li] ) C C C
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C [Li]
+C ( = O ) ( [O-] ) O . C ( = O ) N ( C ) C . C c 1 c c c c c 1
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( [Li] ) ( C ) ( C ) C
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( Cl ) Cl
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( C ) ( C ) N C ( C ) C
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . c 1 c c c c c 1
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( C ) ( C ) N
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . c 1 c c c n c 1
+C ( = O ) ( [O-] ) O . C ( = O ) ( [O-] ) [O-]
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( C ) ( C ) = O
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C ( = O ) Cl
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C ( = O ) Cl . [F-]
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C ( = O ) Cl . [NH4+]
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C ( = O ) Cl . [I-]
+C C 1 ( C ) O C ( = O ) C = C ( C ) N 1 Br . C ( C ) ( C ) N
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C ( = O ) Cl . N
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( C ) ( C ) N C 1 C C 1
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( [Li] ) ( C ) ( C ) C . [F-]
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( [Li] ) ( C ) ( C ) C . O
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( [Li] ) ( C ) ( C ) C . F
+C C 1 ( C ) O C ( = O ) C C ( = O ) O 1 . C ( = O ) ( Cl ) C Cl

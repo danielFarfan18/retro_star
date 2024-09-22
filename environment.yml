@@ -6,10 +6,12 @@ channels:
   - anaconda
   - defaults
 dependencies:
-  - python=3.7
+  - python=3.8
+  - torchvision=0.15.2
   - cpuonly
+  - pytorch=2.2.0
   - pandas
-  - rdkit
+  - rdkit=2023.09.5
   - tqdm
   - networkx
   - graphviz
